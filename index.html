@@ -30,14 +30,12 @@
         .logo {
             display: flex;
             align-items: center;
-            min-width: 150px; /* Ensures space for the logo */
         }
 
         .logo img {
-            height: 45px; /* Slightly larger to match original Meesho feel */
+            height: 40px; 
             width: auto;
             display: block;
-            object-fit: contain;
         }
 
         .header-search {
@@ -51,6 +49,12 @@
             border: 1px solid #999;
             border-radius: 4px;
             outline: none;
+            transition: border-color 0.3s;
+        }
+
+        /* Border turns pink when clicking to search */
+        .header-search input:focus {
+            border-color: #f43397;
         }
 
         .header nav {
@@ -64,6 +68,12 @@
             text-decoration: none;
             font-weight: 500;
             font-size: 14px;
+            transition: color 0.3s; /* Smooth transition for the hover effect */
+        }
+
+        /* ADDED HOVER EFFECT */
+        .header nav a:hover {
+            color: #f43397;
         }
 
         /* CATEGORIES */
@@ -119,7 +129,7 @@
             text-align: left;
             border-radius: 8px;
             overflow: hidden;
-            transition: transform 0.2s;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
 
         .product-card:hover {
@@ -160,6 +170,11 @@
             border-radius: 0 0 5px 5px;
             cursor: pointer;
             font-weight: bold;
+            transition: opacity 0.2s;
+        }
+
+        .product-card button:hover {
+            opacity: 0.9;
         }
 
         /* FOOTER */
@@ -175,7 +190,7 @@
         @media (max-width: 600px) {
             .header {
                 flex-direction: column;
-                gap: 10px;
+                gap: 15px;
                 padding: 10px;
             }
 
@@ -183,10 +198,20 @@
                 width: 100%;
             }
 
+            .header nav {
+                width: 100%;
+                justify-content: space-around;
+            }
+
+            .header nav a {
+                margin-left: 0;
+            }
+
             .categories {
                 gap: 15px;
                 overflow-x: auto;
                 justify-content: flex-start;
+                padding-left: 10px;
             }
         }
     </style>
@@ -196,7 +221,7 @@
 
 <header class="header">
     <div class="logo">
-        <a href="index.html">
+        <a href="#">
             <img src="logo.jpg" alt="Meesho Logo">
         </a>
     </div>
