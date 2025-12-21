@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meesho Clone</title>
+
+    <style>
+        /* RESET */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        /* HEADER */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 4%;
+            background-color: white; /* Changed to white for a cleaner look */
+            border-bottom: 1px solid #ddd;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo img {
+            height: 35px; /* Adjusting logo size */
+            display: block;
+        }
+
+        .header-search {
+            width: 40%;
+            position: relative;
+        }
+
+        .header-search input {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #999;
+            border-radius: 4px;
+            outline: none;
+        }
+
+        .header nav {
+            display: flex;
+            align-items: center;
+        }
+
+        .header nav a {
+            color: #333;
+            margin-left: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        /* CATEGORIES */
+        .categories {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            padding: 15px;
+            background-color: white;
+            border-bottom: 1px solid #eee;
+        }
+
+        .categories div {
+            font-size: 15px;
+            color: #333;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .categories div:hover {
+            color: #f43397;
+        }
+
+        /* BANNER */
+        .banner {
+            text-align: center;
+            padding: 40px;
+            background-color: #fde9f2;
+        }
+
+        .banner h1 {
+            color: #333;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .banner p {
+            color: #666;
+            font-size: 18px;
+        }
+
+        /* PRODUCTS */
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+            padding: 40px 4%;
+        }
+
+        .product-card {
+            border: 1px solid #efefef;
+            padding: 0;
+            text-align: left;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.2s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 12px;
+        }
+
+        .product-card h3 {
+            font-size: 16px;
+            color: #666;
+            font-weight: 400;
+            margin-bottom: 5px;
+        }
+
+        .product-card p {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .product-card button {
+            width: 100%;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #f43397;
+            color: white;
+            border: none;
+            border-radius: 0 0 5px 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* FOOTER */
+        .footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        /* MOBILE RESPONSIVENESS */
+        @media (max-width: 600px) {
+            .header {
+                flex-direction: column;
+                gap: 10px;
+                padding: 10px;
+            }
+
+            .header-search {
+                width: 100%;
+            }
+
+            .categories {
+                gap: 15px;
+                overflow-x: auto;
+                justify-content: flex-start;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="header">
+    <div class="logo">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/8/80/Meesho_Logo_Full.png" alt="Meesho Logo">
+    </div>
+    <div class="header-search">
+        <input type="text" placeholder="Try Saree, Kurti or Search by Product Code">
+    </div>
+    <nav>
+        <a href="#">Download App</a>
+        <a href="#">Become a Supplier</a>
+        <a href="#">Login</a>
+        <a href="#">Cart</a>
+    </nav>
+</header>
+
+<nav class="categories">
+    <div>Women Ethic</div>
+    <div>Women Western</div>
+    <div>Men</div>
+    <div>Kids</div>
+    <div>Home & Kitchen</div>
+    <div>Beauty</div>
+</nav>
+
+<section class="banner">
+    <h1>Lowest Prices, Best Quality</h1>
+    <p>Free Delivery | Cash on Delivery | 7-day Returns</p>
+</section>
+
+<section class="products">
+
+    <div class="product-card">
+        <img src="kurti.jpg"alt="Kurti"> 
+        <div class="product-info">
+            <h3>Trendy Kurti Set</h3>
+            <p>₹499</p>
+        </div>
+        <button>Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+        <img src="shirt.jpg" alt="Shirt">
+        <div class="product-info">
+            <h3>Men Cotton Shirt</h3>
+            <p>₹399</p>
+        </div>
+        <button>Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+        <img src="https://images.meesho.com/images/products/541128883/uo34x_512.avif" alt="Kids">
+        <div class="product-info">
+            <h3>Kids Party Wear</h3>
+            <p>₹299</p>
+        </div>
+        <button>Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+        <img src="deco.jpg" alt="Home">
+        <div class="product-info">
+            <h3>Home Decor Item</h3>
+            <p>₹699</p>
+        </div>
+        <button>Add to Cart</button>
+    </div>
+</section>
+
+<footer class="footer">
+    <p>© 2025 Meesho Clone | Built by Jyothimanikanta</p>
+</footer>
+
+</body>
+</html>
