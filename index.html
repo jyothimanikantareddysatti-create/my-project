@@ -4,230 +4,72 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meesho Clone | Home</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
-        
-        /* HEADER */
-        .header { 
-            display: flex; 
-            align-items: center; 
-            justify-content: space-between; 
-            padding: 10px 4%; 
-            background: white; 
-            border-bottom: 1px solid #ddd; 
-            position: sticky; 
-            top: 0; 
-            z-index: 1000; 
-        }
-
-        .logo-section { display: flex; align-items: center; gap: 20px; }
-        
-        /* Logo Styles */
-        .logo img { 
-            height: 45px; 
-            width: auto;
-            display: block;
-        }
-
-        .cart-nav { position: relative; text-decoration: none; color: #333; font-size: 22px; cursor: pointer; }
-        
-        #cart-count { 
-            position: absolute; 
-            top: -8px; 
-            right: -10px; 
-            background: #f43397; 
-            color: white; 
-            font-size: 11px; 
-            padding: 2px 6px; 
-            border-radius: 50%; 
-            font-weight: bold;
-        }
-
-        .header-search input { 
-            padding: 10px 15px; 
-            width: 400px; 
-            border: 1px solid #999; 
-            border-radius: 4px; 
-            outline: none; 
-        }
-
-        .header nav a { 
-            color: #333; 
-            margin-left: 20px; 
-            text-decoration: none; 
-            font-size: 14px; 
-            font-weight: 500; 
-        }
-
-        .header nav a:hover { color: #f43397; }
-
-        /* CATEGORIES */
-        .categories { 
-            display: flex; 
-            justify-content: center; 
-            gap: 30px; 
-            padding: 15px; 
-            background: #fff; 
-            border-bottom: 1px solid #eee; 
-        }
-        .categories div { cursor: pointer; font-size: 14px; color: #666; }
-        .categories div:hover { color: #f43397; }
-
-        /* BANNER */
-        .banner { text-align: center; padding: 40px; background-color: #fde9f2; }
-        .banner h1 { font-size: 32px; color: #333; }
-
-        /* PRODUCTS GRID */
-        .products { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
-            gap: 25px; 
-            padding: 40px 4%; 
-        }
-
-        .product-card { 
-            border: 1px solid #efefef; 
-            border-radius: 8px; 
-            overflow: hidden; 
-            display: flex; 
-            flex-direction: column; 
-            background: #fff;
-            transition: transform 0.2s;
-        }
-        
-        .product-card:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-
-        .product-card img { width: 100%; height: 280px; object-fit: cover; }
-        
-        .product-info { padding: 15px; flex-grow: 1; }
-        .product-info h3 { font-size: 16px; color: #666; margin-bottom: 8px; }
-        .product-info p { font-size: 20px; font-weight: bold; color: #333; }
-
-        .add-cart-btn { 
-            background: #f43397; 
-            color: white; 
-            padding: 12px; 
-            border: none; 
-            cursor: pointer; 
-            font-weight: bold; 
-            font-size: 16px;
-        }
-        .add-cart-btn:hover { background: #d12a7f; }
-
-        .footer { background: #333; color: white; text-align: center; padding: 20px; margin-top: 40px; }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<header class="header">
-    <div class="logo-section">
-        <div class="logo">
-            <a href="meesho.html">
-                <img src="logo.jpg" alt="Meesho Logo">
-            </a>
-        </div>
-        <a href="cart.html" class="cart-nav">
-            <i class="fa-solid fa-cart-shopping"></i>
-            <span id="cart-count">0</span>
-        </a>
-    </div>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html"><img src="logo.jpg" alt="Meesho Logo"></a>
+            </div>
 
-    <div class="header-search">
-        <input type="text" placeholder="Try Saree, Kurti or Search by Product Code">
-    </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Try Saree, Kurti or Search by Product Code">
+            </div>
 
-    <nav>
-        <a href="melogin.html">Login</a> 
-        <a href="mesignup.html">Signup</a>
-    </nav>
-</header>
+            <div class="nav-links">
+                <a href="melogin.html" class="nav-item">Login</a>
+                <a href="mesignup.html" class="nav-item">Signup</a>
+                <a href="cart.html" class="nav-item">Cart (0)</a>
+            </div>
+        </nav>
+    </header>
 
-<nav class="categories">
-    <div>Women Ethnic</div><div>Women Western</div><div>Men</div><div>Kids</div><div>Home & Kitchen</div><div>Beauty</div>
-</nav>
+    <main>
+        <section class="hero">
+            <h1>Lowest Prices, Best Quality</h1>
+            <p>Free Delivery | Cash on Delivery | 7-day Returns</p>
+        </section>
 
-<section class="banner">
-    <h1>Lowest Prices, Best Quality</h1>
-    <p>Free Delivery | Cash on Delivery | 7-day Returns</p>
-</section>
+        <section class="products">
+            <div class="product-card">
+                <img src="kurti.jpg" alt="Kurti Set">
+                <h3>Trendy Kurti Set</h3>
+                <p>₹499</p>
+                <button>Add to Cart</button>
+            </div>
 
-<section class="products">
-    <div class="product-card">
-        <img src="kurti.jpg" alt="Kurti Set">
-        <div class="product-info">
-            <h3>Trendy Kurti Set</h3>
-            <p>₹499</p>
-        </div>
-        <button class="add-cart-btn" onclick="addToCart('Trendy Kurti Set', '₹499', 'kurti.jpg')">Add to Cart</button>
-    </div>
+            <div class="product-card">
+                <img src="shirt.jpg" alt="Men Shirt">
+                <h3>Men Cotton Shirt</h3>
+                <p>₹399</p>
+                <button>Add to Cart</button>
+            </div>
 
-    <div class="product-card">
-        <img src="shirt.jpg" alt="Men Shirt">
-        <div class="product-info">
-            <h3>Men Cotton Shirt</h3>
-            <p>₹399</p>
-        </div>
-        <button class="add-cart-btn" onclick="addToCart('Men Cotton Shirt', '₹399', 'shirt.jpg')">Add to Cart</button>
-    </div>
+            <div class="product-card">
+                <img src="kid.jpg" alt="Kids Party Wear">
+                <h3>Kids Party Wear</h3>
+                <p>₹299</p>
+                <button>Add to Cart</button>
+            </div>
 
-    <div class="product-card">
-        <img src="kid.jpg" alt="Kids Wear">
-        <div class="product-info">
-            <h3>Kids Party Wear</h3>
-            <p>₹299</p>
-        </div>
-        <button class="add-cart-btn" onclick="addToCart('Kids Party Wear', '₹299', 'kid.jpg')">Add to Cart</button>
-    </div>
+            <div class="product-card">
+                <img src="deco.jpg" alt="Home Decor">
+                <h3>Home Decor Item</h3>
+                <p>₹699</p>
+                <button>Add to Cart</button>
+            </div>
+        </section>
+    </main>
 
-    <div class="product-card">
-        <img src="deco.jpg" alt="Home Decor">
-        <div class="product-info">
-            <h3>Home Decor Item</h3>
-            <p>₹699</p>
-        </div>
-        <button class="add-cart-btn" onclick="addToCart('Home Decor Item', '₹699', 'deco.jpg')">Add to Cart</button>
-    </div>
-</section>
-
-<footer class="footer">
-    <p>© 2025 Meesho Clone | Built by Jyothimanikanta</p>
-</footer>
-
-<script>
-    // Function to add item to local storage and update counter
-    function addToCart(name, price, image) {
-        // Get existing cart or start new
-        let cart = JSON.parse(localStorage.getItem('meeshoCart')) || [];
-        
-        // Add current item
-        cart.push({ name: name, price: price, image: image });
-        
-        // Save back to storage
-        localStorage.setItem('meeshoCart', JSON.stringify(cart));
-        
-        // Update the count on the header icon
-        updateCartCount();
-        
-        alert(name + " added to your cart!");
-    }
-
-    // Function to refresh the cart number
-    function updateCartCount() {
-        let cart = JSON.parse(localStorage.getItem('meeshoCart')) || [];
-        const countDisplay = document.getElementById('cart-count');
-        if (countDisplay) {
-            countDisplay.innerText = cart.length;
-        }
-    }
-
-    // Run this whenever the page loads
-    window.onload = updateCartCount;
-</script>
+    <footer>
+        <p>&copy; 2025 Meesho Clone | Built by Jyothimanikanta</p>
+    </footer>
 
 </body>
 </html>
+
 
 
 
