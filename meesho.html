@@ -3,184 +3,162 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meesho Layout</title>
+    <title>Meesho Clone - CSS Only Cart</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* 1. Global Styles */
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
-        body { background-color: #fff; }
+        /* --- CORE STYLES --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: #f8f9fa; color: #333; }
 
-        /* 2. Header / Top Nav */
+        /* --- THE CHECKBOX HACK LOGIC --- */
+        /* Hide the actual checkboxes */
+        .cart-logic { display: none; }
+
+        /* Default Cart Counter - We use CSS Counters to "Add" */
+        body { counter-reset: cart-count; }
+
+        /* When a checkbox is checked, increment the counter */
+        #item1:checked { counter-increment: cart-count; }
+        #item2:checked { counter-increment: cart-count; }
+        #item3:checked { counter-increment: cart-count; }
+        #item4:checked { counter-increment: cart-count; }
+
+        /* Display the counter value in the header badge */
+        #cart-badge::after {
+            content: counter(cart-count);
+        }
+
+        /* --- HEADER --- */
         header {
+            background: white;
+            padding: 15px 5%;
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            padding: 10px 5%;
-            border-bottom: 1px solid #f0f0f0;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
         .logo img { height: 35px; }
-        .search-container { flex: 0.6; }
-        .search-container input {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #8b8ba3;
-            border-radius: 4px;
-            outline: none;
+        .cart-icon {
+            position: relative;
+            font-size: 22px;
         }
-        .header-links a {
-            margin-left: 20px;
-            text-decoration: none;
-            color: #333;
-            font-size: 14px;
-        }
-
-        /* 3. The Missing Secondary Menu (Gray Text) */
-        .sub-menu {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            padding: 15px;
-            border-bottom: 1px solid #f0f0f0;
-            color: #666;
-            font-size: 15px;
-        }
-
-        /* 4. Pink Promo Banner */
-        .banner {
-            background-color: #fde9f2;
-            text-align: center;
-            padding: 40px;
-        }
-        .banner h1 { font-size: 32px; color: #353543; margin-bottom: 8px; }
-        .banner p { color: #666; font-size: 16px; }
-
-        /* 5. Product Grid */
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr); /* 4 columns like the photo */
-            gap: 20px;
-            padding: 30px 5%;
-        }
-
-        .card {
-            border: 1px solid #f0f0f0;
-            border-radius: 8px;
-            overflow: hidden; /* Important: keeps the zoomed photo inside */
-            transition: 0.3s;
-        }
-
-        /* 6. THE HOVER EFFECT (The Move) */
-        .img-container {
-            width: 100%;
-            height: 300px;
-            overflow: hidden;
-        }
-        .img-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.4s ease; /* Makes the "move" smooth */
-        }
-        /* When cursor touches the card, the photo zooms and moves up */
-        .card:hover img {
-            transform: scale(1.1) translateY(-5px);
-        }
-
-        /* 7. Product Info */
-        .info { padding: 12px; }
-        .product-name { color: #8b8ba3; font-size: 14px; margin-bottom: 4px; }
-        .price { font-size: 18px; font-weight: bold; color: #000; }
-
-        /* 8. Pink Add to Cart Button */
-        .add-btn {
-            width: 100%;
-            padding: 12px;
-            background-color: #f43397;
+        #cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -10px;
+            background: #f43397;
             color: white;
-            border: none;
+            font-size: 12px;
+            padding: 2px 6px;
+            border-radius: 50%;
+            font-weight: bold;
+        }
+
+        /* --- PRODUCT GRID --- */
+        .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        
+        .card {
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #eee;
+            overflow: hidden;
+            text-align: center;
+            padding-bottom: 20px;
+        }
+        .card img { width: 100%; height: 280px; object-fit: cover; }
+        .info { padding: 15px; }
+        .price { font-size: 20px; font-weight: bold; margin: 10px 0; }
+
+        /* --- STYLING THE "BUTTON" (LABEL) --- */
+        .add-to-cart-btn {
+            display: inline-block;
+            background: #f43397;
+            color: white;
+            padding: 10px 25px;
+            border-radius: 4px;
             font-weight: bold;
             cursor: pointer;
-            font-size: 14px;
+            user-select: none;
         }
-        .add-btn:hover { background-color: #d62a83; }
 
+        /* Change button text/color when item is "Added" */
+        #item1:checked ~ .container label[for="item1"],
+        #item2:checked ~ .container label[for="item2"],
+        #item3:checked ~ .container label[for="item3"],
+        #item4:checked ~ .container label[for="item4"] {
+            background: #038d63;
+            pointer-events: none; /* Prevents unchecking/removing */
+        }
+
+        #item1:checked ~ .container label[for="item1"]::before,
+        #item2:checked ~ .container label[for="item2"]::before,
+        #item3:checked ~ .container label[for="item3"]::before,
+        #item4:checked ~ .container label[for="item4"]::before {
+            content: "Added ";
+        }
     </style>
 </head>
 <body>
 
+    <input type="checkbox" id="item1" class="cart-logic">
+    <input type="checkbox" id="item2" class="cart-logic">
+    <input type="checkbox" id="item3" class="cart-logic">
+    <input type="checkbox" id="item4" class="cart-logic">
+
     <header>
-        <div class="logo"><img src="logo.jpg" alt="Logo"></div>
-        <div class="search-container">
-            <input type="text" placeholder="Try Saree, Kurti or Search by Product Code">
-        </div>
-        <div class="header-links">
-            <a href="login.html">Login</a>
-            <a href="login.html">Sign Up</a>
-            <a href="#">Cart (<span id="cart-count">0</span>)</a>
+        <div class="logo"><img src="logo.jpg" alt="Meesho"></div>
+        <div class="cart-icon">
+            <i class="fa fa-shopping-cart"></i>
+            <span id="cart-badge"></span>
         </div>
     </header>
 
-    <div class="sub-menu">
-        <span>Women Ethic</span>
-        <span>Women Western</span>
-        <span>Men</span>
-        <span>Kids</span>
-        <span>Home & Kitchen</span>
-        <span>Beauty</span>
-    </div>
-
-    <div class="banner">
-        <h1>Lowest Prices, Best Quality</h1>
-        <p>Free Delivery | Cash on Delivery | 7-day Returns</p>
-    </div>
-
-    <div class="product-grid">
-        <div class="card">
-            <div class="img-container"><img src="kurti.jpg" alt="Kurti"></div>
-            <div class="info">
-                <p class="product-name">Trendy Kurti Set</p>
-                <p class="price">₹499</p>
+    <div class="container">
+        <h2 style="margin-bottom: 25px;">Products For You</h2>
+        <div class="grid">
+            
+            <div class="card">
+                <img src="kurti.jpg" alt="Kurti">
+                <div class="info">
+                    <p>Women Printed Kurti</p>
+                    <p class="price">₹299</p>
+                    <label for="item1" class="add-to-cart-btn">Add to Cart</label>
+                </div>
             </div>
-            <button class="add-btn" onclick="addToCart()">Add to Cart</button>
-        </div>
 
-        <div class="card">
-            <div class="img-container"><img src="shirt.jpg" alt="Shirt"></div>
-            <div class="info">
-                <p class="product-name">Men Cotton Shirt</p>
-                <p class="price">₹399</p>
+            <div class="card">
+                <img src="shirt.jpg" alt="Shirt">
+                <div class="info">
+                    <p>Men Casual Shirt</p>
+                    <p class="price">₹350</p>
+                    <label for="item2" class="add-to-cart-btn">Add to Cart</label>
+                </div>
             </div>
-            <button class="add-btn" onclick="addToCart()">Add to Cart</button>
-        </div>
 
-        <div class="card">
-            <div class="img-container"><img src="kid.jpg" alt="Kids"></div>
-            <div class="info">
-                <p class="product-name">Kids Party Wear</p>
-                <p class="price">₹299</p>
+            <div class="card">
+                <img src="kid.jpg" alt="Kid">
+                <div class="info">
+                    <p>Kids Ethnic Wear</p>
+                    <p class="price">₹199</p>
+                    <label for="item3" class="add-to-cart-btn">Add to Cart</label>
+                </div>
             </div>
-            <button class="add-btn" onclick="addToCart()">Add to Cart</button>
-        </div>
 
-        <div class="card">
-            <div class="img-container"><img src="deco.jpg" alt="Decor"></div>
-            <div class="info">
-                <p class="product-name">Home Decor Item</p>
-                <p class="price">₹699</p>
+            <div class="card">
+                <img src="deco.jpg" alt="Decoration">
+                <div class="info">
+                    <p>Home Decoration</p>
+                    <p class="price">₹150</p>
+                    <label for="item4" class="add-to-cart-btn">Add to Cart</label>
+                </div>
             </div>
-            <button class="add-btn" onclick="addToCart()">Add to Cart</button>
+
         </div>
     </div>
 
-    <footer>
-    <div class="footer-content">
-        <p>&copy; 2025 My Store. All Rights Reserved.</p>
-        <p>Built by <strong>manikanta</strong></p>
-    </div>
-</footer>
 </body>
 </html>
-
-
-
-
-
