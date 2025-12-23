@@ -3,72 +3,183 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meesho Clone | Home</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Meesho Layout</title>
+    <style>
+        /* 1. Global Styles */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
+        body { background-color: #fff; }
+
+        /* 2. Header / Top Nav */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 5%;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .logo img { height: 35px; }
+        .search-container { flex: 0.6; }
+        .search-container input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #8b8ba3;
+            border-radius: 4px;
+            outline: none;
+        }
+        .header-links a {
+            margin-left: 20px;
+            text-decoration: none;
+            color: #333;
+            font-size: 14px;
+        }
+
+        /* 3. The Missing Secondary Menu (Gray Text) */
+        .sub-menu {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            padding: 15px;
+            border-bottom: 1px solid #f0f0f0;
+            color: #666;
+            font-size: 15px;
+        }
+
+        /* 4. Pink Promo Banner */
+        .banner {
+            background-color: #fde9f2;
+            text-align: center;
+            padding: 40px;
+        }
+        .banner h1 { font-size: 32px; color: #353543; margin-bottom: 8px; }
+        .banner p { color: #666; font-size: 16px; }
+
+        /* 5. Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* 4 columns like the photo */
+            gap: 20px;
+            padding: 30px 5%;
+        }
+
+        .card {
+            border: 1px solid #f0f0f0;
+            border-radius: 8px;
+            overflow: hidden; /* Important: keeps the zoomed photo inside */
+            transition: 0.3s;
+        }
+
+        /* 6. THE HOVER EFFECT (The Move) */
+        .img-container {
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+        }
+        .img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease; /* Makes the "move" smooth */
+        }
+        /* When cursor touches the card, the photo zooms and moves up */
+        .card:hover img {
+            transform: scale(1.1) translateY(-5px);
+        }
+
+        /* 7. Product Info */
+        .info { padding: 12px; }
+        .product-name { color: #8b8ba3; font-size: 14px; margin-bottom: 4px; }
+        .price { font-size: 18px; font-weight: bold; color: #000; }
+
+        /* 8. Pink Add to Cart Button */
+        .add-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #f43397;
+            color: white;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .add-btn:hover { background-color: #d62a83; }
+
+    </style>
 </head>
 <body>
 
     <header>
-        <nav class="navbar">
-            <div class="logo">
-                <a href="index.html"><img src="logo.jpg" alt="Meesho Logo"></a>
-            </div>
-
-            <div class="search-bar">
-                <input type="text" placeholder="Try Saree, Kurti or Search by Product Code">
-            </div>
-
-            <div class="nav-links">
-                <a href="melogin.html" class="nav-item">Login</a>
-                <a href="mesignup.html" class="nav-item">Signup</a>
-                <a href="cart.html" class="nav-item">Cart (0)</a>
-            </div>
-        </nav>
+        <div class="logo"><img src="logo.jpg" alt="Logo"></div>
+        <div class="search-container">
+            <input type="text" placeholder="Try Saree, Kurti or Search by Product Code">
+        </div>
+        <div class="header-links">
+            <a href="login.html">Login</a>
+            <a href="login.html">Sign Up</a>
+            <a href="#">Cart (<span id="cart-count">0</span>)</a>
+        </div>
     </header>
 
-    <main>
-        <section class="hero">
-            <h1>Lowest Prices, Best Quality</h1>
-            <p>Free Delivery | Cash on Delivery | 7-day Returns</p>
-        </section>
+    <div class="sub-menu">
+        <span>Women Ethic</span>
+        <span>Women Western</span>
+        <span>Men</span>
+        <span>Kids</span>
+        <span>Home & Kitchen</span>
+        <span>Beauty</span>
+    </div>
 
-        <section class="products">
-            <div class="product-card">
-                <img src="kurti.jpg" alt="Kurti Set">
-                <h3>Trendy Kurti Set</h3>
-                <p>₹499</p>
-                <button>Add to Cart</button>
-            </div>
+    <div class="banner">
+        <h1>Lowest Prices, Best Quality</h1>
+        <p>Free Delivery | Cash on Delivery | 7-day Returns</p>
+    </div>
 
-            <div class="product-card">
-                <img src="shirt.jpg" alt="Men Shirt">
-                <h3>Men Cotton Shirt</h3>
-                <p>₹399</p>
-                <button>Add to Cart</button>
+    <div class="product-grid">
+        <div class="card">
+            <div class="img-container"><img src="kurti.jpg" alt="Kurti"></div>
+            <div class="info">
+                <p class="product-name">Trendy Kurti Set</p>
+                <p class="price">₹499</p>
             </div>
+            <button class="add-btn" onclick="addToCart()">Add to Cart</button>
+        </div>
 
-            <div class="product-card">
-                <img src="kid.jpg" alt="Kids Party Wear">
-                <h3>Kids Party Wear</h3>
-                <p>₹299</p>
-                <button>Add to Cart</button>
+        <div class="card">
+            <div class="img-container"><img src="shirt.jpg" alt="Shirt"></div>
+            <div class="info">
+                <p class="product-name">Men Cotton Shirt</p>
+                <p class="price">₹399</p>
             </div>
+            <button class="add-btn" onclick="addToCart()">Add to Cart</button>
+        </div>
 
-            <div class="product-card">
-                <img src="deco.jpg" alt="Home Decor">
-                <h3>Home Decor Item</h3>
-                <p>₹699</p>
-                <button>Add to Cart</button>
+        <div class="card">
+            <div class="img-container"><img src="kid.jpg" alt="Kids"></div>
+            <div class="info">
+                <p class="product-name">Kids Party Wear</p>
+                <p class="price">₹299</p>
             </div>
-        </section>
-    </main>
+            <button class="add-btn" onclick="addToCart()">Add to Cart</button>
+        </div>
+
+        <div class="card">
+            <div class="img-container"><img src="deco.jpg" alt="Decor"></div>
+            <div class="info">
+                <p class="product-name">Home Decor Item</p>
+                <p class="price">₹699</p>
+            </div>
+            <button class="add-btn" onclick="addToCart()">Add to Cart</button>
+        </div>
+    </div>
 
     <footer>
-        <p>&copy; 2025 Meesho Clone | Built by Jyothimanikanta</p>
-    </footer>
-
+    <div class="footer-content">
+        <p>&copy; 2025 My Store. All Rights Reserved.</p>
+        <p>Built by <strong>manikanta</strong></p>
+    </div>
+</footer>
 </body>
 </html>
+
 
 
 
