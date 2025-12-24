@@ -3,114 +3,226 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meesho Login Page</title>
+    <title>Meesho - Quality Shopping</title>
     <style>
-        body {
-            background-color: #fce4ec; /* Light pink background from image */
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        /* 1. RESET & BASE STYLES */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif; }
+        body { background-color: #f8f9fa; }
+
+        /* 2. STATE MANAGEMENT (Hidden Checkboxes for Cart) */
+        #c1, #c2, #c3, #c4 { display: none; }
+
+        /* 3. HEADER & SEARCH BAR */
+        header {
+            background: #fff;
+            padding: 10px 5%;
             display: flex;
-            justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
+            justify-content: space-between;
+            border-bottom: 1px solid #ddd;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
-        .login-card {
-            background: white;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            width: 350px;
-            text-align: center;
-        }
+        .logo img { height: 45px; border-radius: 8px; }
 
-        /* LOGO SECTION - Replaced text with Image */
-        .logo-container {
-            margin-bottom: 30px;
+        /* SEARCH BAR FIX */
+        .search-container {
+            flex-grow: 1;
+            margin: 0 40px;
+            max-width: 600px;
         }
-
-        .logo-container img {
-            width: 100px; /* Adjust size as needed */
-            height: auto;
-            border-radius: 15px; /* Matches the rounded square look */
-        }
-
-        h2 {
-            color: #333;
-            margin-bottom: 25px;
-            font-weight: 700;
-        }
-
-        input {
+        .search-container input {
             width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            border: 1px solid #ddd;
+            padding: 12px 15px;
+            border: 1px solid #ccc;
             border-radius: 4px;
-            box-sizing: border-box; /* Ensures padding doesn't affect width */
-            font-size: 14px;
+            background-color: #f9f9f9;
+            outline: none;
         }
 
-        .login-btn {
-            width: 100%;
-            background-color: #f43397; /* Meesho Pink */
+        .nav-right { display: flex; align-items: center; gap: 30px; }
+
+        /* PROFILE DROPDOWN */
+        .profile-dropdown { position: relative; cursor: pointer; padding: 10px 0; color: #333; font-weight: 500; }
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: #fff;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            min-width: 160px;
+            border-radius: 4px;
+        }
+        .dropdown-menu a {
+            display: block;
+            padding: 12px 15px;
+            text-decoration: none;
+            color: #333;
+            font-size: 14px;
+            border-bottom: 1px solid #eee;
+        }
+        .dropdown-menu a:hover { background: #fef4f9; color: #f43397; }
+        .profile-dropdown:hover .dropdown-menu { display: block; }
+
+        /* CART ICON & BADGE */
+        .cart-box { position: relative; font-size: 26px; cursor: pointer; text-decoration: none; color: #333; }
+        .badge {
+            position: absolute;
+            top: -5px;
+            right: -10px;
+            background: #f43397;
+            color: white;
+            font-size: 11px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        /* Show badge if any item checked */
+        #c1:checked ~ header .badge, #c2:checked ~ header .badge, 
+        #c3:checked ~ header .badge, #c4:checked ~ header .badge { display: flex; }
+
+        /* CSS Counter Logic */
+        #c1:checked ~ header .badge::after { content: "1"; }
+        #c1:checked + #c2:checked ~ header .badge::after { content: "2"; }
+        #c1:checked + #c2:checked + #c3:checked ~ header .badge::after { content: "3"; }
+        #c1:checked + #c2:checked + #c3:checked + #c4:checked ~ header .badge::after { content: "4"; }
+
+        /* 4. UPDATED RETURN BANNER (Black Text, No Icon) */
+        .return-banner {
+            background: #fef4f9; /* Light pink background */
+            color: #000000;      /* Fixed: Pure black text */
+            text-align: center;
+            padding: 12px;
+            font-weight: bold;
+            font-size: 16px;
+            border-bottom: 1px solid #fde0ef;
+        }
+
+        /* 5. PRODUCT GRID */
+        .container { padding: 30px 5%; }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+        .card {
+            background: #fff;
+            border: 1px solid #eee;
+            border-radius: 12px;
+            padding: 15px;
+            transition: 0.3s;
+        }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .card img { width: 100%; border-radius: 8px; height: 300px; object-fit: cover; }
+        .card h3 { font-size: 15px; color: #666; margin: 12px 0; font-weight: normal; }
+        .card .price { font-size: 20px; font-weight: bold; margin-bottom: 15px; }
+
+        /* ADD TO CART BUTTON */
+        .add-btn {
+            display: block;
+            text-align: center;
+            background: #f43397;
             color: white;
             padding: 12px;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
-            font-weight: bold;
+            border-radius: 8px;
             cursor: pointer;
-            margin-top: 15px;
-        }
-
-        .login-btn:hover {
-            background-color: #d62a83;
-        }
-
-        .footer-links {
-            margin-top: 20px;
-            font-size: 14px;
-            color: #666;
-        }
-
-        .footer-links a {
-            color: #f43397;
-            text-decoration: none;
             font-weight: bold;
         }
 
-        .back-home {
-            display: block;
-            margin-top: 15px;
-            color: #f43397;
-            text-decoration: none;
-            font-weight: bold;
+        /* Green state when clicked */
+        #c1:checked ~ .container label[for="c1"],
+        #c2:checked ~ .container label[for="c2"],
+        #c3:checked ~ .container label[for="c3"],
+        #c4:checked ~ .container label[for="c4"] {
+            background: #03a685;
+            pointer-events: none;
         }
+        
+        label[for="c1"]::before, label[for="c2"]::before, label[for="c3"]::before, label[for="c4"]::before { content: "Add to Cart"; }
+        #c1:checked ~ .container label[for="c1"]::before,
+        #c2:checked ~ .container label[for="c2"]::before,
+        #c3:checked ~ .container label[for="c3"]::before,
+        #c4:checked ~ .container label[for="c4"]::before { content: "Added ✓"; }
+
     </style>
 </head>
 <body>
 
-    <div class="login-card">
-        <div class="logo-container">
-            <img src="logo.jpg" alt="Meesho Logo">
+    <input type="checkbox" id="c1">
+    <input type="checkbox" id="c2">
+    <input type="checkbox" id="c3">
+    <input type="checkbox" id="c4">
+
+    <header>
+        <div class="logo">
+            <img src="logo.jpg" alt="Meesho">
         </div>
 
-        <h2>Login</h2>
-
-        <form>
-            <input type="text" placeholder="Phone Number or Email" required>
-            <input type="password" placeholder="Password" required>
-            <button type="submit" class="login-btn">Login</button>
-        </form>
-
-        <div class="footer-links">
-            Don't have an account? <a href="#">Sign Up</a>
+        <div class="search-container">
+            <input type="text" placeholder="Try Saree, Kurti or Search by Product Code">
         </div>
-        
-        <a href="#" class="back-home">Back to Home</a>
+
+        <div class="nav-right">
+            <div class="profile-dropdown">
+                👤 Profile ▼
+                <div class="dropdown-menu">
+                    <a href="#login">Login</a>
+                    <a href="#signup">Sign Up</a>
+                    <a href="#">My Orders</a>
+                </div>
+            </div>
+            <a href="#" class="cart-box">
+                🛒
+                <span class="badge"></span>
+            </a>
+        </div>
+    </header>
+
+    <div class="return-banner">
+        7 Days Easy Returns | Free Delivery | Cash on Delivery
     </div>
+
+    <div class="container">
+        <div class="grid">
+            <div class="card">
+                <img src="kurti.jpg" alt="Kurti">
+                <h3>Women Elegant Kurti Set</h3>
+                <p class="price">₹299</p>
+                <label for="c1" class="add-btn"></label>
+            </div>
+            <div class="card">
+                <img src="shirt.jpg" alt="Shirt">
+                <h3>Men's Casual Checkered Shirt</h3>
+                <p class="price">₹350</p>
+                <label for="c2" class="add-btn"></label>
+            </div>
+            <div class="card">
+                <img src="kid.jpg" alt="Kids">
+                <h3>Kids Formal Party Wear</h3>
+                <p class="price">₹199</p>
+                <label for="c3" class="add-btn"></label>
+            </div>
+            <div class="card">
+                <img src="deco.jpg" alt="Decoration">
+                <h3>Om Wall Hanging Decor</h3>
+                <p class="price">₹150</p>
+                <label for="c4" class="add-btn"></label>
+            </div>
+        </div>
+    </div>
+
+    <section id="login" style="padding: 50px; text-align: center; display: none;">Login Page Content</section>
+    <section id="signup" style="padding: 50px; text-align: center; display: none;">Signup Page Content</section>
 
 </body>
 </html>
+
 
