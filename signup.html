@@ -2,116 +2,30 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meesho Sign Up</title>
+    <title>Sign Up - Meesho</title>
     <style>
-        body {
-            background-color: #fce4ec; /* Matching light pink background */
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-
-        .signup-card {
-            background: white;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            width: 350px;
-            text-align: center;
-        }
-
-        .logo-container {
-            margin-bottom: 25px;
-        }
-
-        .logo-container img {
-            width: 100px;
-            height: auto;
-            border-radius: 15px;
-        }
-
-        h2 {
-            color: #333;
-            margin-bottom: 20px;
-            font-weight: 700;
-        }
-
-        input {
-            width: 100%;
-            padding: 12px;
-            margin: 8px 0; /* Slightly tighter margin for more fields */
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            box-sizing: border-box;
-            font-size: 14px;
-        }
-
-        .signup-btn {
-            width: 100%;
-            background-color: #f43397; /* Meesho Pink */
-            color: white;
-            padding: 12px;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 15px;
-        }
-
-        .signup-btn:hover {
-            background-color: #d62a83;
-        }
-
-        .footer-links {
-            margin-top: 20px;
-            font-size: 14px;
-            color: #666;
-        }
-
-        .footer-links a {
-            color: #f43397;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .back-home {
-            display: block;
-            margin-top: 15px;
-            color: #f43397;
-            text-decoration: none;
-            font-weight: bold;
-        }
+        body { font-family: sans-serif; background-color: #f8f9fa; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .signup-card { background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 350px; text-align: center; }
+        .signup-card h2 { margin-bottom: 20px; color: #333; }
+        input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px; }
+        .btn { width: 100%; padding: 12px; background: #f43397; color: white; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; }
+        .footer-text { margin-top: 20px; font-size: 14px; color: #666; }
+        .footer-text a { color: #f43397; text-decoration: none; font-weight: bold; }
     </style>
 </head>
 <body>
-
     <div class="signup-card">
-        <div class="logo-container">
-            <img src="logo.jpg" alt="Meesho Logo">
-        </div>
-
-        <h2>Sign Up</h2>
-
+        <h2>Create Account</h2>
         <form>
             <input type="text" placeholder="Full Name" required>
             <input type="email" placeholder="Email Address" required>
-            <input type="tel" placeholder="Phone Number" required>
-            <input type="password" placeholder="Create Password" required>
-            <button type="submit" class="signup-btn">Create Account</button>
+            <input type="number" placeholder="Mobile Number" required>
+            <input type="password" placeholder="Set Password" required>
+            <button type="submit" class="btn">Sign Up</button>
         </form>
-
-        <div class="footer-links">
-            Already have an account? <a href="login.html">Login</a>
-        </div>
-        
-        <a href="#" class="back-home">Back to Home</a>
+        <p class="footer-text">Already have an account? <a href="login.html">Login</a></p>
     </div>
-
 </body>
 </html>
+
 
