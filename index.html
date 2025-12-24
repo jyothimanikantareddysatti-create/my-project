@@ -9,7 +9,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif; }
         body { background-color: #f8f9fa; }
 
-        /* 2. STATE MANAGEMENT (Hidden Checkboxes for Cart) */
+        /* 2. CART LOGIC (NO JS) */
         #c1, #c2, #c3, #c4 { display: none; }
 
         /* 3. HEADER & SEARCH BAR */
@@ -24,15 +24,8 @@
             top: 0;
             z-index: 1000;
         }
-
         .logo img { height: 45px; border-radius: 8px; }
-
-        /* SEARCH BAR FIX */
-        .search-container {
-            flex-grow: 1;
-            margin: 0 40px;
-            max-width: 600px;
-        }
+        .search-container { flex-grow: 1; margin: 0 40px; max-width: 600px; }
         .search-container input {
             width: 100%;
             padding: 12px 15px;
@@ -41,7 +34,6 @@
             background-color: #f9f9f9;
             outline: none;
         }
-
         .nav-right { display: flex; align-items: center; gap: 30px; }
 
         /* PROFILE DROPDOWN */
@@ -67,42 +59,29 @@
         .dropdown-menu a:hover { background: #fef4f9; color: #f43397; }
         .profile-dropdown:hover .dropdown-menu { display: block; }
 
-        /* CART ICON & BADGE */
+        /* CART ICON & BADGE LOGIC */
         .cart-box { position: relative; font-size: 26px; cursor: pointer; text-decoration: none; color: #333; }
         .badge {
-            position: absolute;
-            top: -5px;
-            right: -10px;
-            background: #f43397;
-            color: white;
-            font-size: 11px;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
+            position: absolute; top: -5px; right: -10px;
+            background: #f43397; color: white; font-size: 11px;
+            width: 20px; height: 20px; border-radius: 50%;
+            display: none; align-items: center; justify-content: center; font-weight: bold;
         }
-
+        
         /* Show badge if any item checked */
         #c1:checked ~ header .badge, #c2:checked ~ header .badge, 
         #c3:checked ~ header .badge, #c4:checked ~ header .badge { display: flex; }
 
-        /* CSS Counter Logic */
+        /* Counter content */
         #c1:checked ~ header .badge::after { content: "1"; }
         #c1:checked + #c2:checked ~ header .badge::after { content: "2"; }
         #c1:checked + #c2:checked + #c3:checked ~ header .badge::after { content: "3"; }
         #c1:checked + #c2:checked + #c3:checked + #c4:checked ~ header .badge::after { content: "4"; }
 
-        /* 4. UPDATED RETURN BANNER (Black Text, No Icon) */
+        /* 4. RETURN BANNER */
         .return-banner {
-            background: #fef4f9; /* Light pink background */
-            color: #000000;      /* Fixed: Pure black text */
-            text-align: center;
-            padding: 12px;
-            font-weight: bold;
-            font-size: 16px;
+            background: #fef4f9; color: #000; text-align: center;
+            padding: 12px; font-weight: bold; font-size: 16px;
             border-bottom: 1px solid #fde0ef;
         }
 
@@ -113,31 +92,19 @@
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 25px;
         }
-        .card {
-            background: #fff;
-            border: 1px solid #eee;
-            border-radius: 12px;
-            padding: 15px;
-            transition: 0.3s;
-        }
-        .card:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .card { background: #fff; border: 1px solid #eee; border-radius: 12px; padding: 15px; transition: 0.3s; }
         .card img { width: 100%; border-radius: 8px; height: 300px; object-fit: cover; }
         .card h3 { font-size: 15px; color: #666; margin: 12px 0; font-weight: normal; }
         .card .price { font-size: 20px; font-weight: bold; margin-bottom: 15px; }
 
-        /* ADD TO CART BUTTON */
+        /* ADD TO CART BUTTONS */
         .add-btn {
-            display: block;
-            text-align: center;
-            background: #f43397;
-            color: white;
-            padding: 12px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
+            display: block; text-align: center; background: #f43397;
+            color: white; padding: 12px; border-radius: 8px;
+            cursor: pointer; font-weight: bold;
         }
 
-        /* Green state when clicked */
+        /* Button change logic when clicked */
         #c1:checked ~ .container label[for="c1"],
         #c2:checked ~ .container label[for="c2"],
         #c3:checked ~ .container label[for="c3"],
@@ -145,13 +112,44 @@
             background: #03a685;
             pointer-events: none;
         }
-        
         label[for="c1"]::before, label[for="c2"]::before, label[for="c3"]::before, label[for="c4"]::before { content: "Add to Cart"; }
         #c1:checked ~ .container label[for="c1"]::before,
         #c2:checked ~ .container label[for="c2"]::before,
         #c3:checked ~ .container label[for="c3"]::before,
         #c4:checked ~ .container label[for="c4"]::before { content: "Added ✓"; }
 
+        /* 6. POP-UP LOGIC (NO JS) */
+        #login, #signup {
+            display: none;
+            position: fixed;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 350px;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            z-index: 2000;
+        }
+
+        /* Show targeted section */
+        #login:target, #signup:target { display: block; }
+
+        /* Dark overlay logic */
+        #login:target ~ .overlay, #signup:target ~ .overlay { display: block; }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 1500;
+        }
+
+        .close-pop {
+            display: block; text-align: center; margin-top: 15px;
+            color: #f43397; text-decoration: none; font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -162,14 +160,10 @@
     <input type="checkbox" id="c4">
 
     <header>
-        <div class="logo">
-            <img src="logo.jpg" alt="Meesho">
-        </div>
-
+        <div class="logo"><img src="logo.jpg" alt="Meesho"></div>
         <div class="search-container">
             <input type="text" placeholder="Try Saree, Kurti or Search by Product Code">
         </div>
-
         <div class="nav-right">
             <div class="profile-dropdown">
                 👤 Profile ▼
@@ -179,10 +173,7 @@
                     <a href="#">My Orders</a>
                 </div>
             </div>
-            <a href="#" class="cart-box">
-                🛒
-                <span class="badge"></span>
-            </a>
+            <a href="#" class="cart-box">🛒<span class="badge"></span></a>
         </div>
     </header>
 
@@ -219,8 +210,29 @@
         </div>
     </div>
 
-    <section id="login" style="padding: 50px; text-align: center; display: none;">Login Page Content</section>
-    <section id="signup" style="padding: 50px; text-align: center; display: none;">Signup Page Content</section>
+    <section id="login">
+        <h2 style="text-align: center; color: #f43397; margin-bottom: 20px;">Login</h2>
+        <form style="display: flex; flex-direction: column; gap: 10px;">
+            <input type="email" placeholder="Email" style="padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+            <input type="password" placeholder="Password" style="padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+            <button type="submit" style="background: #f43397; color: #fff; padding: 10px; border: none; border-radius: 4px; font-weight: bold; cursor: pointer;">Login</button>
+        </form>
+        <a href="#" class="close-pop">Close</a>
+    </section>
+
+    <section id="signup">
+        <h2 style="text-align: center; color: #f43397; margin-bottom: 20px;">Sign Up</h2>
+        <form style="display: flex; flex-direction: column; gap: 10px;">
+            <input type="text" placeholder="Full Name" style="padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+            <input type="email" placeholder="Email" style="padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+            <input type="password" placeholder="Create Password" style="padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+            <button type="submit" style="background: #f43397; color: #fff; padding: 10px; border: none; border-radius: 4px; font-weight: bold; cursor: pointer;">Register</button>
+        </form>
+        <a href="#" class="close-pop">Close</a>
+    </section>
+
+    <div class="overlay"></div>
 
 </body>
 </html>
+
